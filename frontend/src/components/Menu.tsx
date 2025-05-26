@@ -43,7 +43,7 @@ export default async function MenuPage() {
                 {/* Icon */}
                 <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${subCategory.icon.url}`}
+                    src={`${process.env.NEXT_PUBLIC_STRAPI_URL || ''}${subCategory.icon.url}`}
                     alt={subCategory.icon.alternativeText || subCategory.Name}
                     fill
                     className="object-cover"
