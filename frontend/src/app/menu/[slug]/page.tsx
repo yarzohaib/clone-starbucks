@@ -8,9 +8,9 @@ import {
 } from "@/lib/strapi";
 
 type MenuDetailPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function MenuDetailPage({ params }: MenuDetailPageProps) {
@@ -18,7 +18,7 @@ export default async function MenuDetailPage({ params }: MenuDetailPageProps) {
   const subCategories = await getSubCategories();
   const subSubCategories = await getSubSubCategories();
   const products = await getProducts();
-  const { slug } = params;
+  const { slug } = await params;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[256px_1fr] h-screen bg-white pt-10">
