@@ -17,8 +17,8 @@ const nextConfig = {
       //Add your production Strapi domain here when you deploy
       {
         protocol: 'https',
-        hostname: 'your-strapi-domain.com',
-        pathname: '/uploads/**',
+        hostname: 'victorious-strength-82f631d95b.media.strapiapp.com',
+        pathname: '/**',
       },
     ],
   },
