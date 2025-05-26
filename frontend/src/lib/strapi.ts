@@ -9,13 +9,14 @@ if (!STRAPI_URL) {
  * Fetches categories from Strapi
  */
 export async function getCategories(): Promise<Category[]> {
-  const res = await fetch(`${STRAPI_URL}/api/categories`);
+  const res = await fetch(`${STRAPI_URL}/api/categories?populate=sub_categories`);
   const json = await res.json();
   return json.data.map((item: Category) => ({
     id: item.id,
     documentId: item.documentId,
     Name: item.Name,
     slug: item.slug || null,
+    sub_categories:item.sub_categories,
   }));
 }
 
@@ -40,8 +41,8 @@ export async function getSubCategories(): Promise<SubCategory[]> {
       height: item.icon.height,
       url: item.icon.url,
     },
-    category:item.category || [],
-    sub_sub_category: item.sub_sub_category || [],
+    category:item.category,
+    sub_sub_category: item.sub_sub_category,
   }));
 }
 
@@ -91,6 +92,8 @@ export async function getHero(): Promise<Hero[]> {
     return [];
   }
 }
+
+// Fetches products data from strapi
 export async function getProducts(): Promise<Product[]> {
   try {
     const res = await fetch(`${STRAPI_URL}/api/products?populate=*`);
@@ -121,7 +124,7 @@ export async function getProducts(): Promise<Product[]> {
         url: item.image.url,
         formats: item.image.formats,
       },
-      sub_sub_categories: [],
+      sub_sub_categories: item.sub_sub_categories,
     }));
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -130,12 +133,13 @@ export async function getProducts(): Promise<Product[]> {
 }
 
 export async function getSubSubCategories(): Promise<SubSubCategory[]> {
-  const res = await fetch(`${STRAPI_URL}/api/sub-sub-categories?populate=products`);
+  const res = await fetch(`${STRAPI_URL}/api/sub-sub-categories?populate[products][populate]=*&populate[sub_category][populate]=*`);//sub-sub-categories?populate[products][populate]=*
   const json = await res.json();
   return json.data.map((item: SubSubCategory) => ({
     id: item.id,
     documentId: item.documentId,
     Name: item.Name,
-    products: item.products || [],
+    sub_category: item.sub_category,
+    products: item.products ,
   }));
 }

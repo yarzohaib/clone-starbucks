@@ -16,21 +16,21 @@ export default async function MenuPage() {
       // Adjust this filter logic based on how categories and subcategories are related in your Strapi
       sub.Name.toLowerCase().includes(category.Name.toLowerCase()) ||
       category.Name === 'Drinks' && ['Hot Coffee', 'Cold Coffee', 'Hot Tea', 'Cold Tea', 'Refreshers', 'Frappuccino Blended Beverage', 'Hot Chocolate, Lemonades & More', 'Bottled Beverages'].some(drink => sub.Name.includes(drink)) ||
-      category.Name === 'Food' && ['Breakfast', 'Bakery', 'Treats', 'Lunch'].some(food => sub.Name.includes(food)) ||
+      category.Name === 'Food' && ['Breakfast', 'Snacks', 'Treats', 'Lunch'].some(food => sub.Name.includes(food)) ||
       category.Name === 'At Home Coffee' && ['Whole Bean', 'VIA Instant', 'Shopping Bag'].some(Coffee => sub.Name.includes(Coffee))
     )
   }));
 
   return (
     <div className="min-h-screen bg-white p-6">
-      <h1 className="text-2xl font-bold text-gray-900 mb-8">Menu</h1>
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">Menu</h1><br/><br/>
       
       {groupedData.map(({ category, subCategories }) => (
         <div key={category.id} className="mb-12">
           {/* Category Title */}
-          <h2 className="text-xl font-semibold text-gray-800 mb-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">
             {category.Name}
-          </h2>
+          </h2><br/><hr/><br/>
           
           {/* Subcategories Grid */}
           <div className="grid grid-cols-2 gap-6">
@@ -41,23 +41,23 @@ export default async function MenuPage() {
                 className="flex items-center space-x-4 p-2 rounded-lg hover:bg-gray-50 transition-colors"
               >
                 {/* Icon */}
-                <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0">
+                <div className="relative w-24 h-24 rounded-full overflow-hidden flex-shrink-0">
                   <Image
                     src={`${process.env.NEXT_PUBLIC_STRAPI_URL || ''}${subCategory.icon.url}`}
                     alt={subCategory.icon.alternativeText || subCategory.Name}
                     fill
                     className="object-cover"
-                    sizes="64px"
+                    sizes="96px"
                   />
                 </div>
                 
                 {/* Name */}
-                <span className="text-gray-800 font-medium text-sm leading-tight">
-                  {subCategory.Name}
+                <span className="text-gray-800 font-medium text-lg leading-tight">
+                  {'\u00A0'}{'\u00A0'}{subCategory.Name}
                 </span>
               </Link>
             ))}
-          </div>
+          </div><br/>
         </div>
       ))}
       

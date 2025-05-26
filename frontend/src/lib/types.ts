@@ -3,6 +3,7 @@ export interface Category {
     documentId: string;
     Name: string;
     slug: string|null;
+    sub_categories: SubCategory 
 }
 
 export interface Hero {
@@ -57,12 +58,13 @@ export interface Product {
   price: number | null;
   calories: number | null;
   image: ImageData;
-  sub_sub_categories: SubSubCategory[];
+  sub_sub_categories: SubSubCategory;
 }
 
 export interface SubSubCategory {
     id: number;
     documentId: string;
     Name: string;
-    products: Product;
+    sub_category: SubCategory;
+    products: Product[];
 }

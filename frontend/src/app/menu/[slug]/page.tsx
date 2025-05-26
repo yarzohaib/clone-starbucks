@@ -2,7 +2,6 @@ import MenuNavigation from "@/components/MenuNavigation";
 import MenuDetail from "@/components/MenuDetail";
 import {
   getCategories,
-  getProducts,
   getSubCategories,
   getSubSubCategories,
 } from "@/lib/strapi";
@@ -14,11 +13,27 @@ type MenuDetailPageProps = {
 };
 
 export default async function MenuDetailPage({ params }: MenuDetailPageProps) {
+  const { slug } = await params;
   const categories = await getCategories();
   const subCategories = await getSubCategories();
   const subSubCategories = await getSubSubCategories();
-  const products = await getProducts();
-  const { slug } = await params;
+
+    console.log('Slug:', slug);
+  console.log('Categories:', categories?.length);
+  console.log('SubCategories:', subCategories?.length);
+  console.log('SubSubCategories:', subSubCategories?.length);
+
+  // Find the current subcategory by slug
+  const currentSubCategory = subCategories.find(subCat => subCat.slug === slug);
+
+  // Handle case where subcategory is not found
+  if (!currentSubCategory) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-xl text-gray-600">Subcategory not found</p>
+      </div>
+    );
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[256px_1fr] h-screen bg-white pt-10">
@@ -37,10 +52,8 @@ export default async function MenuDetailPage({ params }: MenuDetailPageProps) {
         <br />
         <br />
         <MenuDetail
-          subCategories={subCategories}
+          subCategory={currentSubCategory}
           subSubCategories={subSubCategories}
-          products={products}
-          slug={slug}
         />
       </div>
     </div>
