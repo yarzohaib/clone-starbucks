@@ -15,7 +15,7 @@ export default async function MenuPage() {
     subCategories: subCategories.filter(sub => 
       // Adjust this filter logic based on how categories and subcategories are related in your Strapi
       sub.Name.toLowerCase().includes(category.Name.toLowerCase()) ||
-      category.Name === 'Drinks' && ['Hot Coffee', 'Cold Coffee', 'Hot Tea', 'Cold Tea', 'Refreshers', 'Frappuccino Blended Beverage', 'Hot Chocolate, Lemonades & More', 'Bottled Beverages'].some(drink => sub.Name.includes(drink)) ||
+      category.Name === 'Drinks' && ['Hot Coffee', 'Cold Coffee', 'Hot Tea', 'Cold Tea', 'Refreshers', 'Frappuccino', 'Hot Chocolate, Lemonades & More', 'Bottled Beverages'].some(drink => sub.Name.includes(drink)) ||
       category.Name === 'Food' && ['Breakfast', 'Snacks', 'Treats', 'Lunch'].some(food => sub.Name.includes(food)) ||
       category.Name === 'At Home Coffee' && ['Whole Bean', 'VIA Instant', 'Shopping Bag'].some(Coffee => sub.Name.includes(Coffee))
     )
