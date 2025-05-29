@@ -148,7 +148,7 @@ export default function Navbar() {
                 MENU
               </Link>
               <Link
-                href="/rewards"
+                href="/"
                 className={`text-gray-700 hover:text-[#00704A] font-bold text-sm tracking-wide uppercase transition-colors duration-200 pb-6 border-b-2 ${
                   isActive("/rewards") ? "border-[#00704A] text-[#00704A]" : "border-transparent"
                 }`}
@@ -156,7 +156,7 @@ export default function Navbar() {
                 REWARDS
               </Link>
               <Link
-                href="/gift-cards"
+                href="/"
                 className={`text-gray-700 hover:text-[#00704A] font-bold text-sm tracking-wide uppercase transition-colors duration-200 pb-6 border-b-2 ${
                   isActive("/gift-cards") ? "border-[#00704A] text-[#00704A]" : "border-transparent"
                 }`}
