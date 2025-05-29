@@ -36,7 +36,7 @@ export default function MenuNavigation({ categories, subCategories }: MenuNaviga
   return (
     <div className="flex bg-white">
       {/* Left empty column */}
-      <div className="w-10 bg-transparent"></div>
+      <div className="w-20 lg:w-33 bg-transparent"></div>
       
       {/* Navigation content */}
       <nav className="w-64 bg-white p-6 font-sans">

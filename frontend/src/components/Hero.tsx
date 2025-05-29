@@ -1,81 +1,10 @@
-// import Image from "next/image";
-// import { Button } from "@/components/ui/button";
-// import { getHero } from "@/lib/strapi";
-// import Link from "next/link";
-
-
-// const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337';
-
-// export default  async function Hero() {
- 
-//   const data = await getHero();
-
-//   if (!data || data.length === 0) {
-//     return (
-//       <section className="p-12 text-center">
-//         <h1 className="text-2xl font-semibold">No hero content available.</h1>
-//       </section>
-//     );
-//   }
-
-//   return (
-//     <section className="max-w-9xl mx-auto px-6 lg:px-8 space-y-12">
-//       {data.map((hero, index) => {
-//   const imageUrl = hero.image?.formats?.large?.url ??
-//                    hero.image?.formats?.medium?.url ??
-//                    hero.image?.formats?.small?.url ??
-//                    hero.image?.url;
-
-//   const fullImageUrl = imageUrl?.startsWith('http') 
-//     ? imageUrl 
-//     : `${STRAPI_URL}${imageUrl?.startsWith('/') ? imageUrl : `/${imageUrl}`}`;
-
-//   const isReversed = index % 2 !== 0;
-
-//   return (
-//     <div
-//       key={hero.documentId || hero.id}
-//       className={` flex flex-col lg:flex-row ${isReversed ? 'lg:flex-row-reverse' : ''} items-center justify-center`}
-//     >
-//       {/* Left or Right: Image */}
-//       <div className="w-full lg:w-1/2 aspect-[4/3] lg:aspect-auto relative overflow-hidden shadow-md min-h-[400px]">
-//         {fullImageUrl ? (
-//           <Image
-//             src={fullImageUrl}
-//             alt={hero.image?.alternativeText || "Hero Image"}
-//             fill
-//             className="object-cover"
-//             priority
-//           />
-//         ) : (
-//           <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-//             <p className="text-gray-500">No image available</p>
-//           </div>
-//         )}
-//       </div>
-
-//       {/* Left or Right: Text content */}
-//       <div className="w-full lg:w-1/2 bg-[#006241] text-white p-10 flex flex-col justify-center items-center lg:items-start text-center lg:text-left space-y-6 h-[400px]">
-//         <h1 className="text-4xl font-bold tracking-tight ">{hero.Title}</h1>
-//         <p className="text-lg">{hero.subtitle}</p>
-//         <Button variant="outline"
-//         className="border-white text-black hover:bg-white hover:text-[#006241] px-6 py-2 text-base rounded-full transition justify-items-center" > <Link href="/menu"  > View the menu </Link> </Button>
-//       </div>
-//     </div>
-//   );
-// })}
-
-//     </section>
-//   );
-// }
-
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { getHero } from "@/lib/strapi";
+import { getHero, STRAPI_URL } from "@/lib/strapi";
 import Link from "next/link";
 import React from "react";
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337';
+// const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337';
 
 export default async function Hero() {
   const data = await getHero();

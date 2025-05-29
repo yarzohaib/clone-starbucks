@@ -12,10 +12,10 @@ export default async function MenuPage() {
   // You might need to modify this based on your actual Strapi structure
   const groupedData = categories.map(category => ({
     category,
-    subCategories: subCategories.filter(sub => 
+    subCategories: subCategories.filter(sub =>
       // Adjust this filter logic based on how categories and subcategories are related in your Strapi
       sub.Name.toLowerCase().includes(category.Name.toLowerCase()) ||
-      category.Name === 'Drinks' && ['Hot Coffee', 'Cold Coffee', 'Hot Tea', 'Cold Tea', 'Refreshers', 'Frappuccino', 'Hot Chocolate, Lemonades & More', 'Bottled Beverages'].some(drink => sub.Name.includes(drink)) ||
+      category.Name === 'Drinks' && ['Hot Coffee', 'Cold Coffee', 'Hot Tea', 'Cold Tea', 'Refreshers', 'Frappuccino', 'Hot Chocolate, Lemonades & More', 'Bo     ttled Beverages'].some(drink => sub.Name.includes(drink)) ||
       category.Name === 'Food' && ['Breakfast', 'Snacks', 'Treats', 'Lunch'].some(food => sub.Name.includes(food)) ||
       category.Name === 'At Home Coffee' && ['Whole Bean', 'VIA Instant', 'Shopping Bag'].some(Coffee => sub.Name.includes(Coffee))
     )
@@ -23,15 +23,15 @@ export default async function MenuPage() {
 
   return (
     <div className="min-h-screen bg-white p-6">
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">Menu</h1><br/><br/>
-      
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">Menu</h1><br /><br />
+
       {groupedData.map(({ category, subCategories }) => (
         <div key={category.id} className="mb-12">
           {/* Category Title */}
           <h2 className="text-2xl font-bold text-gray-800 mb-6">
             {category.Name}
-          </h2><br/><hr/><br/>
-          
+          </h2><br /><hr /><br />
+
           {/* Subcategories Grid */}
           <div className="grid grid-cols-2 gap-6">
             {subCategories.map((subCategory) => (
@@ -50,17 +50,17 @@ export default async function MenuPage() {
                     sizes="96px"
                   />
                 </div>
-                
+
                 {/* Name */}
                 <span className="text-gray-800 font-medium text-lg leading-tight">
                   {'\u00A0'}{'\u00A0'}{subCategory.Name}
                 </span>
               </Link>
             ))}
-          </div><br/>
+          </div><br />
         </div>
       ))}
-      
+
       {/* Fallback if no data */}
       {groupedData.length === 0 && (
         <div className="text-center py-12">
