@@ -143,3 +143,50 @@ export async function getSubSubCategories(): Promise<SubSubCategory[]> {
     products: item.products ,
   }));
 }
+
+
+/**
+ * Fetches a single product by slug from Strapi
+ */
+export async function getProductBySlug(slug: string): Promise<Product | null> {
+  try {
+    const res = await fetch(`${STRAPI_URL}/api/products?filters[slug][$eq]=${slug}&populate=*`);
+    
+    if (!res.ok) {
+      console.error(`Failed to fetch product: ${res.status} ${res.statusText}`);
+      return null;
+    }
+
+    const json = await res.json();
+    
+    if (!json.data || json.data.length === 0) {
+      return null;
+    }
+
+    const item = json.data[0];
+    return {
+      id: item.id,
+      documentId: item.documentId,
+      Name: item.Name,
+      slug: item.slug,
+      description: item.description,
+      price: item.price,
+      calories: item.calories,
+      image: {
+        id: item.image.id,
+        documentId: item.image.documentId,
+        name: item.image.name,
+        alternativeText: item.image.alternativeText,
+        caption: item.image.caption,
+        width: item.image.width,
+        height: item.image.height,
+        url: item.image.url,
+        formats: item.image.formats,
+      },
+      sub_sub_categories: item.sub_sub_categories,
+    };
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    return null;
+  }
+}

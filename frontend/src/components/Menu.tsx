@@ -8,12 +8,11 @@ export default async function MenuPage() {
   const categories = await getCategories();
   const subCategories = await getSubCategories();
 
-  // Group subcategories by category (assuming you have a relationship field)
-  // You might need to modify this based on your actual Strapi structure
+  // Group subcategories by category 
   const groupedData = categories.map(category => ({
     category,
     subCategories: subCategories.filter(sub =>
-      // Adjust this filter logic based on how categories and subcategories are related in your Strapi
+      //filter logic based on how categories and subcategories are related in Strapi
       sub.Name.toLowerCase().includes(category.Name.toLowerCase()) ||
       category.Name === 'Drinks' && ['Hot Coffee', 'Cold Coffee', 'Hot Tea', 'Cold Tea', 'Refreshers', 'Frappuccino', 'Hot Chocolate, Lemonades & More', 'Bo     ttled Beverages'].some(drink => sub.Name.includes(drink)) ||
       category.Name === 'Food' && ['Breakfast', 'Snacks', 'Treats', 'Lunch'].some(food => sub.Name.includes(food)) ||
